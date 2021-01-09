@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Main";
     RecyclerView mContacts;
     DbHelper dbHelper;
+    MainFragment mainFragment;
+    DetailFragment detailFragment;
 
     //sort queries
 
@@ -55,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mContacts = findViewById(R.id.mainRV);
+        //mContacts = findViewById(R.id.mainRV);
 
+        mainFragment =
         StoragePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         dbHelper = new DbHelper(this);
@@ -298,13 +301,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
-
-
         }else{
             Toast.makeText(this, "No backup backup", Toast.LENGTH_SHORT).show();
         }
 
     }
-
-
 }

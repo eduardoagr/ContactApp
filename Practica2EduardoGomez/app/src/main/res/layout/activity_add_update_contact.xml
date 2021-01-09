@@ -103,6 +103,23 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Phone Number">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addUpdate_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="OpenCalendar"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
         <Button
             android:id="@+id/addUpdate_save"
             android:layout_width="match_parent"

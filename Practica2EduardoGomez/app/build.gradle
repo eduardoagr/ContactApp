@@ -42,6 +42,7 @@ dependencies {
 
     //Importing CSV
     implementation 'com.opencsv:opencsv:4.6'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
