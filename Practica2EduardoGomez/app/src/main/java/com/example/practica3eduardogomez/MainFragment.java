@@ -1,6 +1,7 @@
 package com.example.practica3eduardogomez;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,8 +30,15 @@ public class MainFragment extends Fragment {
     private String mParam2;
 
     RecyclerView mContacts;
+    DbHelper dbHelper;
 
+    String orderByNewest = DatabaseConstants.C_ADDED_TIMESTAMP + " DESC";
+    String orderByOldest = DatabaseConstants.C_ADDED_TIMESTAMP + " ASC";
+    String orderByNameAsc = DatabaseConstants.C_NAME + " ASC";
+    String orderByNameDesc = DatabaseConstants.C_NAME + " DESC ";
 
+    // We have to save the current order status
+    String currentOrderState = orderByNewest;
 
     public MainFragment() {
         // Required empty public constructor
@@ -67,6 +75,33 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mContacts = view.findViewById(R.id.mainRV);
+
+        init(view);
+    }
+
+    private void init(View view) {
+        //New way of doing a click listener
+        view.findViewById(R.id.main_addRecordBtn).setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AddUpdateContactActivity.class);
+            intent.putExtra("isEditMode",false); // We jest want to modify if we tap on the more button
+            startActivity(intent);
+        });
+
+        dbHelper = new DbHelper(getContext());
+
+        //By default is newest first
+        LoadRecords(orderByNewest);
+    }
+
+    public void LoadRecords(String orderBy) {
+        currentOrderState = orderBy;
+        CustomAdapter customAdapter = new CustomAdapter(getContext(), dbHelper.GetAllContacts(orderBy));
+        mContacts.setAdapter(customAdapter);
+    }
+
+    public void SearchDatabase(String query) {
+        CustomAdapter customAdapter = new CustomAdapter(getContext(), dbHelper.SearchContacts(query));
+        mContacts.setAdapter(customAdapter);
     }
 
     @Override

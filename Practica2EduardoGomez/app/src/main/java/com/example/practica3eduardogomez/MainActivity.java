@@ -15,6 +15,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.opencsv.CSVReader;
@@ -57,35 +59,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //mContacts = findViewById(R.id.mainRV);
+        mContacts = findViewById(R.id.mainRV);
 
-        mainFragment =
         StoragePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-        dbHelper = new DbHelper(this);
+        FragmentManager fm = getSupportFragmentManager();
+        mainFragment = (MainFragment) fm.findFragmentById(R.id.fragmentContact);
+
+        FragmentTransaction frt = fm.beginTransaction();
+        frt.replace(R.id.fragmentContact, mainFragment);
+        frt.addToBackStack(null);
+        frt.commit();
+
+        FragmentManager fm1 = getSupportFragmentManager();
+        detailFragment = (DetailFragment) fm1.findFragmentById(R.id.fragmentDataContact);
+
+        FragmentTransaction frt1 = fm1.beginTransaction();
+        frt1.replace(R.id.fragmentDataContact, detailFragment);
+        frt1.addToBackStack(null);
+        frt1.commit();
+
+        //dbHelper = new DbHelper(this);
 
         //By default is newest first
-        LoadRecords(orderByNewest);
+       // LoadRecords(orderByNewest);
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setTitle("All Records"); //Setting the title
         getSupportActionBar().setSubtitle("Total records: " + dbHelper.GetRecordsCount());
-
-
-        //New way of doing a click listener
-        findViewById(R.id.main_addRecordBtn).setOnClickListener(view -> {
-            Intent intent = new Intent(this, AddUpdateContactActivity.class);
-            intent.putExtra("isEditMode",false); // We jest want to modify if we tap on the more button
-            startActivity(intent);
-        });
     }
 
+    /*
     private void LoadRecords(String orderBy) {
         currentOrderState = orderBy;
         CustomAdapter customAdapter = new CustomAdapter(this, dbHelper.GetAllContacts(orderBy));
         mContacts.setAdapter(customAdapter);
     }
+
+     */
 
     public boolean CheckStoragePermission(){
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
@@ -102,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        LoadRecords(currentOrderState); //This will reload the date
+        mainFragment.LoadRecords(currentOrderState);
+        //LoadRecords(currentOrderState); //This will reload the date
     }
 
     @Override
@@ -117,13 +130,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //Search when keyboard clicked
-                SearchDatabase(query);
+                mainFragment.SearchDatabase(query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                SearchDatabase(newText);
+                mainFragment.SearchDatabase(newText);
                 return true;
             }
         });
@@ -174,25 +187,28 @@ public class MainActivity extends AppCompatActivity {
 
             switch (i){
                 case 0:
-                    LoadRecords(orderByNameAsc);
+                    mainFragment.LoadRecords(orderByNameAsc);
                     break;
                 case 1:
-                    LoadRecords(orderByNameDesc);
+                    mainFragment.LoadRecords(orderByNameDesc);
                     break;
                 case 2:
-                    LoadRecords(orderByNewest);
+                    mainFragment.LoadRecords(orderByNewest);
                     break;
                 case 3:
-                    LoadRecords(orderByOldest);
+                    mainFragment.LoadRecords(orderByOldest);
                     break;
             }
         }).show();
     }
 
+    /*
     private void SearchDatabase(String query) {
         CustomAdapter customAdapter = new CustomAdapter(this, dbHelper.SearchContacts(query));
         mContacts.setAdapter(customAdapter);
     }
+
+     */
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
