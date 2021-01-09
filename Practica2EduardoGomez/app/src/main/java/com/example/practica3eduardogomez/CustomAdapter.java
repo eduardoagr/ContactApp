@@ -1,8 +1,7 @@
-package com.example.practica2eduardogomez;
+package com.example.practica3eduardogomez;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -10,19 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
-
-import javax.security.auth.login.LoginException;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderContacts> {
 

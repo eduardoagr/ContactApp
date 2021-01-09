@@ -1,4 +1,4 @@
-package com.example.practica2eduardogomez;
+package com.example.practica3eduardogomez;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,26 +21,20 @@ import androidx.core.content.ContextCompat;
 
 import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.nio.file.FileStore;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
-import static com.example.practica2eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_ADDRESS;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_EMAIL;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_ID;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_IMAGE;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_LAST_NAME;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_NAME;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_PHONE_NUMBER;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_UPDATED_TIMESTAMP;
-import static com.example.practica2eduardogomez.DatabaseConstants.TABLE_NAME;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDRESS;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_EMAIL;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_ID;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_IMAGE;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_LAST_NAME;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_NAME;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_PHONE_NUMBER;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_UPDATED_TIMESTAMP;
+import static com.example.practica3eduardogomez.DatabaseConstants.TABLE_NAME;
 
 public class DetailActivity extends AppCompatActivity {
 

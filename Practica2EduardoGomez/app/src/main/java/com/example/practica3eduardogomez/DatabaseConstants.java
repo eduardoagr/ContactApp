@@ -1,4 +1,4 @@
-package com.example.practica2eduardogomez;
+package com.example.practica3eduardogomez;
 
 public class DatabaseConstants {
 

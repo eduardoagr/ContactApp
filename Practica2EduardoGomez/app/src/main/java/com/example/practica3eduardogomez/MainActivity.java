@@ -1,11 +1,8 @@
-package com.example.practica2eduardogomez;
+package com.example.practica3eduardogomez;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.audiofx.EnvironmentalReverb;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;

@@ -1,31 +1,29 @@
-package com.example.practica2eduardogomez;
+package com.example.practica3eduardogomez;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.SyncStateContract;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import static com.example.practica2eduardogomez.DatabaseConstants.CREATE_TABLE;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_ADDRESS;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_EMAIL;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_ID;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_IMAGE;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_LAST_NAME;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_NAME;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_PHONE_NUMBER;
-import static com.example.practica2eduardogomez.DatabaseConstants.C_UPDATED_TIMESTAMP;
-import static com.example.practica2eduardogomez.DatabaseConstants.DB_NAME;
-import static com.example.practica2eduardogomez.DatabaseConstants.DB_VERSION;
-import static com.example.practica2eduardogomez.DatabaseConstants.DROP;
-import static com.example.practica2eduardogomez.DatabaseConstants.TABLE_NAME;
+import static com.example.practica3eduardogomez.DatabaseConstants.CREATE_TABLE;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDRESS;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_EMAIL;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_ID;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_IMAGE;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_LAST_NAME;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_NAME;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_PHONE_NUMBER;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_UPDATED_TIMESTAMP;
+import static com.example.practica3eduardogomez.DatabaseConstants.DB_NAME;
+import static com.example.practica3eduardogomez.DatabaseConstants.DB_VERSION;
+import static com.example.practica3eduardogomez.DatabaseConstants.DROP;
+import static com.example.practica3eduardogomez.DatabaseConstants.TABLE_NAME;
 
 public class DbHelper extends SQLiteOpenHelper {
 

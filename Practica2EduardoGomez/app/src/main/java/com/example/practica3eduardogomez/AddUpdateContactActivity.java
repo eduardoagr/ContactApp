@@ -1,10 +1,9 @@
-package com.example.practica2eduardogomez;
+package com.example.practica3eduardogomez;
 
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.inputmethodservice.ExtractEditText;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
