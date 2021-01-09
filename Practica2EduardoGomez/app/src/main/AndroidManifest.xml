@@ -17,9 +17,9 @@
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.Practica2EduardoGomez">
 
-        <activity android:name="com.example.practica3eduardogomez.DetailActivity" android:screenOrientation="portrait" />
-        <activity android:name="com.example.practica3eduardogomez.AddUpdateContactActivity" android:screenOrientation="portrait" />
-        <activity android:name="com.example.practica3eduardogomez.MainActivity" android:screenOrientation="portrait">
+        <activity android:name="com.example.practica3eduardogomez.DetailActivity" />
+        <activity android:name="com.example.practica3eduardogomez.AddUpdateContactActivity" />
+        <activity android:name="com.example.practica3eduardogomez.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

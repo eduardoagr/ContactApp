@@ -33,25 +33,26 @@
         app:srcCompat="@android:drawable/ic_input_add" />
     -->
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContact"
         android:layout_width="0dp"
+        android:name="com.example.practica3eduardogomez.MainFragment"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/fragmentDataContact"
-        app:layout_constraintTop_toTopOf="parent"
-        class="com.example.practica3eduardogomez.MainFragment"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentDataContact"
         android:layout_width="0dp"
+        android:name="com.example.practica3eduardogomez.DetailFragment"
         android:layout_height="0dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/fragmentContact"
-        app:layout_constraintTop_toTopOf="parent"
-        class="com.example.practica3eduardogomez.DetailFragment"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

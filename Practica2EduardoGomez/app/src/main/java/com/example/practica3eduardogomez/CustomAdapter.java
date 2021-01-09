@@ -3,6 +3,7 @@ package com.example.practica3eduardogomez;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
+import com.example.practica3eduardogomez.listeners.OnClickAdapterListener;
 
 import java.util.ArrayList;
 
@@ -24,13 +26,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
     Context context;
     ArrayList<Contact> contactArrayList;
     DbHelper dbHelper;
+
+    OnClickAdapterListener listener;
     //Constructor
+    public CustomAdapter(Context context, ArrayList<Contact> contactArrayList, OnClickAdapterListener listener) {
+        this.context = context;
+        this.contactArrayList = contactArrayList;
+        this.listener = listener;
+        dbHelper = new DbHelper(context);
+    }
+
+    /*
     public CustomAdapter(Context context, ArrayList<Contact> contactArrayList) {
         this.context = context;
         this.contactArrayList = contactArrayList;
-
         dbHelper = new DbHelper(context);
     }
+
+     */
 
     //Here we just need to inflate our new created layout
     @NonNull
@@ -64,7 +77,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
         holder.phone.setText(phoneNumber);
 
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(context, DetailActivity.class);
+            if(listener != null){
+                listener.DataTransfer(id);
+            }
+            Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra("detailID", id);
             context.startActivity(intent);
 

@@ -13,12 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.practica3eduardogomez.listeners.OnClickAdapterListener;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements OnClickAdapterListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,15 +45,6 @@ public class MainFragment extends Fragment {
     public MainFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static MainFragment newInstance(String param1, String param2) {
         MainFragment fragment = new MainFragment();
@@ -79,7 +72,7 @@ public class MainFragment extends Fragment {
         init(view);
     }
 
-    private void init(View view) {
+    public void init(View view) {
         //New way of doing a click listener
         view.findViewById(R.id.main_addRecordBtn).setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), AddUpdateContactActivity.class);
@@ -95,12 +88,12 @@ public class MainFragment extends Fragment {
 
     public void LoadRecords(String orderBy) {
         currentOrderState = orderBy;
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), dbHelper.GetAllContacts(orderBy));
+        CustomAdapter customAdapter = new CustomAdapter(getContext(), dbHelper.GetAllContacts(orderBy), this);
         mContacts.setAdapter(customAdapter);
     }
 
     public void SearchDatabase(String query) {
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), dbHelper.SearchContacts(query));
+        CustomAdapter customAdapter = new CustomAdapter(getContext(), dbHelper.SearchContacts(query), this);
         mContacts.setAdapter(customAdapter);
     }
 
@@ -119,5 +112,10 @@ public class MainFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void DataTransfer(String id) {
+
     }
 }

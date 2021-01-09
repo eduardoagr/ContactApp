@@ -43,12 +43,10 @@ public class DetailActivity extends AppCompatActivity {
     TextView nameTv, emailTv, addressTv, phoneNumberTv, dateAdded;
     //This is wll be used for displaying the picture
     CircularImageView circularProfile;
-
     DbHelper dbHelper;
 
     String contactID;
-    String[] phonePermission, smsPermission;
-
+    String[] phonePermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +131,6 @@ public class DetailActivity extends AppCompatActivity {
                 RequestCallingPermission();
                 if (CheckForCallPermission())
                     SendSms();
-
                 break;
 
             case R.id.detail_menu_call:
@@ -162,6 +159,7 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+
     private void PhoneCall() {
 
         String[] num = phoneNumberTv.getText().toString().split(":");
@@ -170,20 +168,6 @@ public class DetailActivity extends AppCompatActivity {
         Intent phoneCallIntent = new Intent(Intent.ACTION_CALL);
         phoneCallIntent.setData(Uri.parse("tel:" + phone));
         startActivity(phoneCallIntent);
-    }
-
-    private void RequestCallingPermission() {
-        ActivityCompat.requestPermissions(this, phonePermission, PHONE_REQUEST_CODE);
-    }
-
-    private boolean CheckForCallPermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
     protected void sendEmail(){
@@ -207,4 +191,18 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+
+    private void RequestCallingPermission() {
+        ActivityCompat.requestPermissions(this, phonePermission, PHONE_REQUEST_CODE);
+    }
+
+    private boolean CheckForCallPermission() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

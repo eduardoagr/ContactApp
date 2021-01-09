@@ -3,6 +3,7 @@ package com.example.practica3eduardogomez;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -19,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.practica3eduardogomez.listeners.OnClickAdapterListener;
 import com.opencsv.CSVReader;
 
 import java.io.File;
@@ -27,7 +29,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnClickAdapterListener {
 
     private static final String TAG = "Main";
     RecyclerView mContacts;
@@ -79,18 +81,23 @@ public class MainActivity extends AppCompatActivity {
         frt1.addToBackStack(null);
         frt1.commit();
 
+        /*
+        Bundle bundle = new Bundle();
+        bundle.putString("detail", id);
+        // set Fragmentclass Arguments
+        MainFragment fragobj = new MainFragment();
+        fragobj.setArguments(bundle);
+
+         */
+
         //dbHelper = new DbHelper(this);
 
         //By default is newest first
        // LoadRecords(orderByNewest);
-
-        assert getSupportActionBar() != null;   //null check
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
-        getSupportActionBar().setTitle("All Records"); //Setting the title
-        getSupportActionBar().setSubtitle("Total records: " + dbHelper.GetRecordsCount());
     }
 
     /*
+
     private void LoadRecords(String orderBy) {
         currentOrderState = orderBy;
         CustomAdapter customAdapter = new CustomAdapter(this, dbHelper.GetAllContacts(orderBy));
@@ -321,5 +328,21 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No backup backup", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    @Override
+    public void DataTransfer(String id) {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Bundle bundle = new Bundle();
+            bundle.putString("detail", id);
+            // set Fragmentclass Arguments
+            MainFragment fragobj = new MainFragment();
+            fragobj.setArguments(bundle);
+        } else {
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra("detailID", id);
+            startActivity(intent);
+        }
     }
 }

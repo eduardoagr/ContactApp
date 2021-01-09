@@ -9,7 +9,8 @@ public class Contact {
     //C#, witch is the improved version of JAVA lol, the create and empty or default constructor
     //By the way c# is my favorite language, XAMARIN IS THE FUTURE
 
-    public Contact() { }
+    public Contact() {
+    }
 
     public Contact(String id, String image, String name, String lastName, String email, String address, String phoneNumber, String addedTime, String updateTime) {
         this.id = id;
@@ -95,3 +96,4 @@ public class Contact {
         this.updateTime = updateTime;
     }
 }
+
