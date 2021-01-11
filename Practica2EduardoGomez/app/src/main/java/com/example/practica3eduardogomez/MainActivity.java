@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.practica3eduardogomez.listeners.OnClickAdapterListener;
 import com.example.practica3eduardogomez.listeners.OnClickMainListener;
 import com.opencsv.CSVReader;
 
@@ -70,8 +69,6 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
         StoragePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         showMyFragments();
-
-
 
         /*
         Bundle bundle = new Bundle();
@@ -123,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
             // set detailFragment Arguments
             DetailFragment detailFragment = new DetailFragment();
             detailFragment.setArguments(bundle);
-
 
             FragmentTransaction frt = fm.beginTransaction();
             frt.replace(R.id.fragmentContact, mainFragment);
@@ -307,6 +303,8 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
                 fw.append(""+contactArrayList.get(i).getAddedTime()); // 7
                 fw.append(",");
                 fw.append(""+contactArrayList.get(i).getUpdateTime()); // 8
+                fw.append(",");
+                fw.append(""+contactArrayList.get(i).getBirthday()); // 9
                 fw.append("\n");
             }
 
@@ -319,6 +317,7 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+    @SuppressWarnings("deprecation")
     private void ImportCSV() {
         //We are going to use the same path and file name to import
 
@@ -342,6 +341,7 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
                     String phoneNumbers = nextLine[6];
                     String addedTimes = nextLine[7];
                     String updatedTimes = nextLine[8];
+                    String birthday = nextLine[9];
 
                     long timeStamp = System.currentTimeMillis();
                     long id = dbHelper.InsertRecord(
@@ -352,7 +352,8 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
                             "" + address,
                             "" + phoneNumbers,
                             "" + addedTimes,
-                            "" + updatedTimes
+                            "" + updatedTimes,
+                            "" + birthday
                     );
                 }
             }catch (Exception exception){

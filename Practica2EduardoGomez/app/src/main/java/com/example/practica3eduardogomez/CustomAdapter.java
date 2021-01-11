@@ -3,7 +3,6 @@ package com.example.practica3eduardogomez;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +58,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
         String phoneNumber = contactModel.getPhoneNumber();
         String addedTime = contactModel.getAddedTime();
         String updatedTime = contactModel.getUpdateTime();
+        String birth = contactModel.getBirthday();
 
         if (image.equals("null")){
             holder.profileImage.setImageResource(R.drawable.ic_baseline_person_24);
@@ -72,7 +72,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
             if(listener != null){
                 listener.DataTransfer(id);
             }
-
         });
         holder.MoreBtn.setOnClickListener(view -> {
 
@@ -90,7 +89,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
                     ""+address,
                     ""+phoneNumber,
                     ""+addedTime,
-                    ""+updatedTime
+                    ""+updatedTime,
+                    ""+birth
             );
 
             Log.e(TAG, "onBindViewHolder: " + image);
@@ -99,7 +99,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
 
     //I do not understand anything, so I will change the parameters
     private void ShowMore(String position, String id, String image, String name,
-                          String lastName, String email, String address, String phoneNumber, String addedTime, String updatedTime) {
+                          String lastName, String email, String address, String phoneNumber, String addedTime, String updatedTime, String birth) {
 
 
         String [] options = {"Edit", "Delete"};
@@ -121,6 +121,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
                     intent.putExtra("PHONE_NUMBER", phoneNumber);
                     intent.putExtra("ADDED_TIME", addedTime);
                     intent.putExtra("UPDATE_TIME", updatedTime);
+                    intent.putExtra("BIRTH", birth);
                     intent.putExtra("isEditMode", true);
 
                     context.startActivity(intent);

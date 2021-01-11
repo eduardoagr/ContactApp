@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import static com.example.practica3eduardogomez.DatabaseConstants.CREATE_TABLE;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDRESS;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_BIRTH;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_EMAIL;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ID;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_IMAGE;
@@ -48,7 +49,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //insert TO DB
     public long InsertRecord(String image, String name, String lastName, String occupation, String address, String phoneNumber,
-                             String addedTime, String updatedTime){
+                             String addedTime, String updatedTime, String birth){
 
         //Get the writable database, because we want to add into it
         SQLiteDatabase db = this.getWritableDatabase();
@@ -64,6 +65,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(C_PHONE_NUMBER, phoneNumber);
         values.put(C_ADDED_TIMESTAMP, addedTime);
         values.put(C_UPDATED_TIMESTAMP, updatedTime);
+        values.put(C_BIRTH, birth);
 
         long id = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -93,7 +95,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDRESS)),
                         ""+cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER)),
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP)),
-                        ""+cursor.getString(cursor.getColumnIndex(C_UPDATED_TIMESTAMP))
+                        ""+cursor.getString(cursor.getColumnIndex(C_BIRTH))
                 );
 
                 //We need to add our record to the list
@@ -130,7 +132,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDRESS)),
                         ""+cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER)),
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP)),
-                        ""+cursor.getString(cursor.getColumnIndex(C_UPDATED_TIMESTAMP))
+                        ""+cursor.getString(cursor.getColumnIndex(C_BIRTH))
                 );
 
                 //We need to add our record to the list
@@ -159,7 +161,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //Update data
     public void UpdateRecord(String id, String image, String name, String lastName, String occupation, String address, String phoneNumber,
-                             String addedTime, String updatedTime){
+                             String addedTime, String updatedTime, String birth){
 
         //Get the writable database, because we want to add into it
         SQLiteDatabase db = this.getWritableDatabase();
@@ -175,6 +177,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(C_PHONE_NUMBER, phoneNumber);
         values.put(C_ADDED_TIMESTAMP, addedTime);
         values.put(C_UPDATED_TIMESTAMP, updatedTime);
+        values.put(C_BIRTH, birth);
 
         db.update(TABLE_NAME, values, C_ID + " = ?", new String[]{id});
         db.close();

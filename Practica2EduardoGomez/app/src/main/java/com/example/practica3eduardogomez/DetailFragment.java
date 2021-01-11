@@ -33,6 +33,7 @@ import java.util.Locale;
 
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDRESS;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_BIRTH;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_EMAIL;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ID;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_IMAGE;
@@ -157,6 +158,7 @@ public class DetailFragment extends Fragment {
         phoneNumberTv = view.findViewById(R.id.detail_phone_number);
         circularProfile = view.findViewById(R.id.detail_profileImage);
         phonePermission = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS};
+        birthDate = view.findViewById(R.id.detail_birthday);
 
         dbHelper = new DbHelper(getContext());
     }
@@ -187,6 +189,7 @@ public class DetailFragment extends Fragment {
                 String phoneNumber = "" + cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER));
                 String addedTimeStamp = "" + cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP));
                 String updateTimeStamp = "" + cursor.getString(cursor.getColumnIndex(C_UPDATED_TIMESTAMP));
+                String birth = "" + cursor.getString(cursor.getColumnIndex(C_BIRTH));
 
                 Calendar calendar = Calendar.getInstance(Locale.getDefault());
                 calendar.setTimeInMillis(Long.parseLong(addedTimeStamp));
@@ -202,6 +205,7 @@ public class DetailFragment extends Fragment {
                 emailTv.setText(String.format("Email: %s", email));
                 addressTv.setText(String.format("address: %s", address));
                 phoneNumberTv.setText(String.format("phone number: %s", phoneNumber));
+                birthDate.setText(String.format("Birthday: %s", birth));
                 dateAdded.setText(String.format("Added on: %s", timeAdded));
                 circularProfile.setImageURI(Uri.parse(image));
 

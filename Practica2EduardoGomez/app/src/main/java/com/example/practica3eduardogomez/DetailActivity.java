@@ -27,6 +27,7 @@ import java.util.Objects;
 
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDRESS;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_BIRTH;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_EMAIL;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ID;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_IMAGE;
@@ -40,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private static final int PHONE_REQUEST_CODE = 300;
     private static final String TAG = "DetailActivity";
-    TextView nameTv, emailTv, addressTv, phoneNumberTv, dateAdded;
+    TextView nameTv, emailTv, addressTv, phoneNumberTv, dateAdded, birthDate;
     //This is wll be used for displaying the picture
     CircularImageView circularProfile;
     DbHelper dbHelper;
@@ -70,6 +71,7 @@ public class DetailActivity extends AppCompatActivity {
         phoneNumberTv = findViewById(R.id.detail_phone_number);
         circularProfile = findViewById(R.id.detail_profileImage);
         phonePermission = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS};
+        birthDate = findViewById(R.id.detail_birthday);
 
         Intent intent = getIntent();
         if( getIntent().getExtras() != null)
@@ -101,6 +103,7 @@ public class DetailActivity extends AppCompatActivity {
                 String phoneNumber = "" + cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER));
                 String addedTimeStamp = "" + cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP));
                 String updateTimeStamp = "" + cursor.getString(cursor.getColumnIndex(C_UPDATED_TIMESTAMP));
+                String birth = "" + cursor.getString(cursor.getColumnIndex(C_BIRTH));
 
                 Calendar calendar = Calendar.getInstance(Locale.getDefault());
                 calendar.setTimeInMillis(Long.parseLong(addedTimeStamp));
@@ -116,6 +119,7 @@ public class DetailActivity extends AppCompatActivity {
                 emailTv.setText(String.format("Email: %s", email));
                 addressTv.setText(String.format("address: %s", address));
                 phoneNumberTv.setText(String.format("phone number: %s", phoneNumber));
+                birthDate.setText(String.format("Birthday: %s", birth));
                 dateAdded.setText(String.format("Added on: %s", timeAdded));
                 circularProfile.setImageURI(Uri.parse(image));
 

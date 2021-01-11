@@ -49,7 +49,7 @@ public class AddUpdateContactActivity extends AppCompatActivity {
     // NO MORE THAN 300 LINES OF CODE IN AN ACTIVITY (SOMETIMES YOU CAN BEND THIS RULE), AND ALWAYS MAKE THING ON METHODS (IF POSSIBLE)*/
     Uri ImageFileUri;
     DatePickerDialog picker;
-    String id, name, lastName, email, address, phoneNumber, addedTime, updatedTime;
+    String id, name, lastName, email, address, phoneNumber, addedTime, updatedTime, birhdate;
 
     boolean isEditMode = false;
 
@@ -100,13 +100,12 @@ public class AddUpdateContactActivity extends AppCompatActivity {
         isEditMode = intent.getBooleanExtra("isEditMode", false);
         if (isEditMode) {
             getSupportActionBar().setTitle("Update");
-
             id = intent.getStringExtra("ID");
             name = intent.getStringExtra("NAME");
             lastName = intent.getStringExtra("LAST_NAME");
             email = intent.getStringExtra("EMAIL");
-
-            // II was trying to implement google places api, that I always do this, but is deprecated.
+            birhdate = intent.getStringExtra("BIRTH");
+            // I was trying to implement google places api, that I always do this, but is deprecated.
             // I tried to use it, but I cannot retrieve the address
             address = intent.getStringExtra("ADDRESS");
             phoneNumber = intent.getStringExtra("PHONE_NUMBER");
@@ -120,6 +119,7 @@ public class AddUpdateContactActivity extends AppCompatActivity {
             emailEt.setText(email);
             addressEt.setText(address);
             phoneNumberEt.setText(phoneNumber);
+            birth.setText(birhdate);
 
             if (ImageFileUri.toString().equals("null")) {
                 profileImage.setImageResource(R.drawable.ic_baseline_person_24);
@@ -143,6 +143,7 @@ public class AddUpdateContactActivity extends AppCompatActivity {
         email = emailEt.getText().toString().trim();
         address = addressEt.getText().toString().trim();
         phoneNumber = phoneNumberEt.getText().toString().trim();
+        birhdate = birth.getText().toString().trim();
 
         if (isEditMode) {
 
@@ -157,6 +158,7 @@ public class AddUpdateContactActivity extends AppCompatActivity {
                     "" + address,
                     "" + phoneNumber,
                     "" + addedTime,
+                    ""+ birhdate,
                     timestanp
             );
 
@@ -176,7 +178,8 @@ public class AddUpdateContactActivity extends AppCompatActivity {
                     "" + address,
                     "" + phoneNumber,
                     "" + timestanp,
-                    "" + timestanp
+                    "" + timestanp,
+                    "" + birhdate
             );
 
             finish();
