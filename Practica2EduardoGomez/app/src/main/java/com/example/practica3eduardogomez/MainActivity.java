@@ -16,11 +16,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.practica3eduardogomez.listeners.OnClickAdapterListener;
+import com.example.practica3eduardogomez.listeners.OnClickMainListener;
 import com.opencsv.CSVReader;
 
 import java.io.File;
@@ -29,13 +31,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnClickAdapterListener {
+public class MainActivity extends AppCompatActivity implements OnClickMainListener {
 
     private static final String TAG = "Main";
     RecyclerView mContacts;
     DbHelper dbHelper;
-    MainFragment mainFragment;
-    DetailFragment detailFragment;
+
+    //Fragment
+    private MainFragment mainFragment;
+    private DetailFragment detailFragment;
 
     //sort queries
 
@@ -65,21 +69,9 @@ public class MainActivity extends AppCompatActivity implements OnClickAdapterLis
 
         StoragePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-        FragmentManager fm = getSupportFragmentManager();
-        mainFragment = (MainFragment) fm.findFragmentById(R.id.fragmentContact);
+        showMyFragments();
 
-        FragmentTransaction frt = fm.beginTransaction();
-        frt.replace(R.id.fragmentContact, mainFragment);
-        frt.addToBackStack(null);
-        frt.commit();
 
-        FragmentManager fm1 = getSupportFragmentManager();
-        detailFragment = (DetailFragment) fm1.findFragmentById(R.id.fragmentDataContact);
-
-        FragmentTransaction frt1 = fm1.beginTransaction();
-        frt1.replace(R.id.fragmentDataContact, detailFragment);
-        frt1.addToBackStack(null);
-        frt1.commit();
 
         /*
         Bundle bundle = new Bundle();
@@ -89,11 +81,55 @@ public class MainActivity extends AppCompatActivity implements OnClickAdapterLis
         fragobj.setArguments(bundle);
 
          */
+    }
 
-        //dbHelper = new DbHelper(this);
+    private void showMyFragments() {
+        FragmentManager fm = getSupportFragmentManager();
+        mainFragment = (MainFragment) fm.findFragmentById(R.id.fragmentContact);
+
+        FragmentTransaction frt = fm.beginTransaction();
+        frt.replace(R.id.fragmentContact, mainFragment);
+        frt.addToBackStack(null);
+        frt.commit();
+
+        //FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm1 = getSupportFragmentManager();
+        detailFragment = (DetailFragment) fm1.findFragmentById(R.id.fragmentDataContact);
+
+
+        Fragment fg1 = fm.findFragmentById(R.id.fragmentDataContact);
+        FragmentTransaction frt1 = fm1.beginTransaction();
+        frt1.detach(fg1);
+        frt1.attach(fg1);
+        frt1.commit();
+
+        firstLoadFragment();
+        /*frt1.replace(R.id.fragmentDataContact, detailFragment);
+        frt1.addToBackStack(null);
+        frt1.commit();*/
+
+    }
+
+    private void firstLoadFragment() {
+        dbHelper = new DbHelper(this);
 
         //By default is newest first
-       // LoadRecords(orderByNewest);
+        ArrayList<Contact> contactArrayList = dbHelper.GetAllContacts(currentOrderState);
+        if(!contactArrayList.isEmpty() && contactArrayList.get(0).id != null){
+            //detailFragment.setId(contactArrayList.get(0).id);
+            FragmentManager fm = getSupportFragmentManager();
+            Bundle bundle = new Bundle();
+            bundle.putString("detail", contactArrayList.get(0).id);
+            // set detailFragment Arguments
+            DetailFragment detailFragment = new DetailFragment();
+            detailFragment.setArguments(bundle);
+
+
+            FragmentTransaction frt = fm.beginTransaction();
+            frt.replace(R.id.fragmentContact, mainFragment);
+            frt.addToBackStack(null);
+            frt.commit();
+        }
     }
 
     /*
@@ -331,14 +367,15 @@ public class MainActivity extends AppCompatActivity implements OnClickAdapterLis
     }
 
     @Override
-    public void DataTransfer(String id) {
+    public void transferId(String id) {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Bundle bundle = new Bundle();
+            detailFragment.setId(id);
+            /*Bundle bundle = new Bundle();
             bundle.putString("detail", id);
             // set Fragmentclass Arguments
-            MainFragment fragobj = new MainFragment();
-            fragobj.setArguments(bundle);
+            DetailFragment fragobj = new DetailFragment();
+            fragobj.setArguments(bundle);*/
         } else {
             Intent intent = new Intent(this, DetailActivity.class);
             intent.putExtra("detailID", id);

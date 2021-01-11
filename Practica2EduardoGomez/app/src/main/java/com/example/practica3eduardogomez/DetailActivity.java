@@ -45,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
     CircularImageView circularProfile;
     DbHelper dbHelper;
 
-    String contactID;
+    String contactID="";
     String[] phonePermission;
 
     @Override
@@ -53,9 +53,15 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        init();
+    }
+
+    private void init(){
         dbHelper = new DbHelper(this);
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Contact detail");
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setTitle("Contact detailt"); //Setting the title
 
         dateAdded = findViewById(R.id.detail_date_added);
         nameTv = findViewById(R.id.detail_name);
@@ -66,9 +72,12 @@ public class DetailActivity extends AppCompatActivity {
         phonePermission = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS};
 
         Intent intent = getIntent();
-        contactID = intent.getStringExtra("detailID");
-        if (!contactID.isEmpty()) {
-            ShowDetails();
+        if( getIntent().getExtras() != null)
+        {
+            contactID = intent.getStringExtra("detailID");
+            if (!contactID.isEmpty()) {
+                ShowDetails();
+            }
         }
     }
 

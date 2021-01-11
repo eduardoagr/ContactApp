@@ -27,7 +27,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
     ArrayList<Contact> contactArrayList;
     DbHelper dbHelper;
 
-    OnClickAdapterListener listener;
+    private OnClickAdapterListener listener;
     //Constructor
     public CustomAdapter(Context context, ArrayList<Contact> contactArrayList, OnClickAdapterListener listener) {
         this.context = context;
@@ -36,14 +36,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
         dbHelper = new DbHelper(context);
     }
 
-    /*
-    public CustomAdapter(Context context, ArrayList<Contact> contactArrayList) {
-        this.context = context;
-        this.contactArrayList = contactArrayList;
-        dbHelper = new DbHelper(context);
-    }
-
-     */
 
     //Here we just need to inflate our new created layout
     @NonNull
@@ -80,9 +72,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
             if(listener != null){
                 listener.DataTransfer(id);
             }
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra("detailID", id);
-            context.startActivity(intent);
 
         });
         holder.MoreBtn.setOnClickListener(view -> {

@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +30,6 @@ import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
 
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Objects;
 
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDRESS;
@@ -60,7 +58,7 @@ public class DetailFragment extends Fragment {
     CircularImageView circularProfile;
     DbHelper dbHelper;
     private static final int PHONE_REQUEST_CODE = 300;
-    String contactID;
+    String contactID="";
     String[] phonePermission;
     String strtext;
 
@@ -85,6 +83,38 @@ public class DetailFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            contactID = getArguments().getString("detailID");
+        }
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        if (getArguments() != null) {
+            contactID = getArguments().getString("detailID");
+        }
+        /*Intent intent = new Intent();
+        if( intent.getExtras() != null)
+        {
+            contactID = intent.getStringExtra("detailID");
+            if (!contactID.isEmpty()) {
+                showDetails();
+            }
+        }*/
+        /*contactID = getArguments() != null ? getArguments().getString("detail") : null;
+        if (!contactID.isEmpty()) {
+            showDetails();
+        }*/
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_detail, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init(view);
+        if (!contactID.isEmpty()) {
+            showDetails();
         }
     }
 
@@ -118,23 +148,6 @@ public class DetailFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        strtext = getArguments() != null ? getArguments().getString("detail") : null;
-
-        return inflater.inflate(R.layout.fragment_detail, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        init(view);
-    }
-
     private void init(View view) {
 
         dateAdded = view.findViewById(R.id.detail_date_added);
@@ -144,22 +157,20 @@ public class DetailFragment extends Fragment {
         phoneNumberTv = view.findViewById(R.id.detail_phone_number);
         circularProfile = view.findViewById(R.id.detail_profileImage);
         phonePermission = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS};
+
+        dbHelper = new DbHelper(getContext());
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
+    public void setId(String id){
+        this.contactID = id;
+        showDetails();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    private void ShowDetails() {
+    private void showDetails() {
 
         //get recons detail
 
+        dbHelper = new DbHelper(getContext());
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + C_ID + " =\"" + contactID + "\"";
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -249,6 +260,16 @@ public class DetailFragment extends Fragment {
 
     private boolean CheckForCallPermission() {
         return ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 
 }

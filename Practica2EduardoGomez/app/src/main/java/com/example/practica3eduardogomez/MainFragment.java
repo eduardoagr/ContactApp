@@ -2,6 +2,7 @@ package com.example.practica3eduardogomez;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,13 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.practica3eduardogomez.listeners.OnClickAdapterListener;
+import com.example.practica3eduardogomez.listeners.OnClickMainListener;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment implements OnClickAdapterListener{
+public class MainFragment extends Fragment implements OnClickAdapterListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,6 +43,7 @@ public class MainFragment extends Fragment implements OnClickAdapterListener{
 
     // We have to save the current order status
     String currentOrderState = orderByNewest;
+    private OnClickMainListener listener;
 
     public MainFragment() {
         // Required empty public constructor
@@ -107,15 +110,24 @@ public class MainFragment extends Fragment implements OnClickAdapterListener{
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            listener = (OnClickMainListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnListItemSelectedListener");
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        listener = null;
     }
 
     @Override
     public void DataTransfer(String id) {
-
+        listener.transferId(id);
     }
 }

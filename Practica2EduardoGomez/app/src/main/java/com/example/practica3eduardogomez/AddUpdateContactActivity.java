@@ -92,6 +92,11 @@ public class AddUpdateContactActivity extends AppCompatActivity {
 
         //Get data from intent
         Intent intent = getIntent();
+        //Avoid nulls
+        if( getIntent().getExtras() != null)
+        {
+            isEditMode = intent.getBooleanExtra("isEditMode", false);
+        }
         isEditMode = intent.getBooleanExtra("isEditMode", false);
         if (isEditMode) {
             getSupportActionBar().setTitle("Update");
