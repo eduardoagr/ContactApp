@@ -344,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
                     String appointment = nextLine[9];
 
                     long timeStamp = System.currentTimeMillis();
-                    boolean id = dbHelper.InsertRecord(
+                    long id = dbHelper.InsertRecord(
                             "" + image,
                             "" + names,
                             " " + lastnames,

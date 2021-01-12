@@ -170,7 +170,7 @@ public class AddUpdateContactActivity extends AppCompatActivity {
             String timestanp = "" + System.currentTimeMillis();
 
             //I have to ask why do we have to convert to string
-            boolean id = dbHelper.InsertRecord(
+            long id = dbHelper.InsertRecord(
                     "" + ImageFileUri,
                     "" + name,
                     " " + lastName,

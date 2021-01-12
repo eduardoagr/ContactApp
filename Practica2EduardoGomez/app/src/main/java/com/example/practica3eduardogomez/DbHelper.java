@@ -48,7 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //insert TO DB
-    public boolean InsertRecord(String image, String name, String lastName, String occupation, String address, String phoneNumber,
+    public long InsertRecord(String image, String name, String lastName, String occupation, String address, String phoneNumber,
                              String addedTime, String updatedTime, String appointment){
 
         //Get the writable database, because we want to add into it
@@ -67,12 +67,10 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(C_UPDATED_TIMESTAMP, updatedTime);
         values.put(C_APPOINTMENT, appointment);
 
-        long result = db.insert(TABLE_NAME, null, values);
+        long id = db.insert(TABLE_NAME, null, values);
+        db.close();
 
-        if (result == -1){
-            return false;
-        }else
-            return true;
+        return id;
     }
 
     //Get all Data from database
