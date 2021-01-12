@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
                 fw.append(",");
                 fw.append(""+contactArrayList.get(i).getUpdateTime()); // 8
                 fw.append(",");
-                fw.append(""+contactArrayList.get(i).getBirthday()); // 9
+                fw.append(""+contactArrayList.get(i).getAppointment()); // 9
                 fw.append("\n");
             }
 
@@ -341,10 +341,10 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
                     String phoneNumbers = nextLine[6];
                     String addedTimes = nextLine[7];
                     String updatedTimes = nextLine[8];
-                    String birthday = nextLine[9];
+                    String appointment = nextLine[9];
 
                     long timeStamp = System.currentTimeMillis();
-                    long id = dbHelper.InsertRecord(
+                    boolean id = dbHelper.InsertRecord(
                             "" + image,
                             "" + names,
                             " " + lastnames,
@@ -353,7 +353,7 @@ public class MainActivity extends AppCompatActivity implements OnClickMainListen
                             "" + phoneNumbers,
                             "" + addedTimes,
                             "" + updatedTimes,
-                            "" + birthday
+                            "" + appointment
                     );
                 }
             }catch (Exception exception){

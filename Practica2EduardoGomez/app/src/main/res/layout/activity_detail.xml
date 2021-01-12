@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Birth"
+        android:text="appointment"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/detail_phone_number"
         app:layout_constraintTop_toBottomOf="@+id/detail_phone_number" />

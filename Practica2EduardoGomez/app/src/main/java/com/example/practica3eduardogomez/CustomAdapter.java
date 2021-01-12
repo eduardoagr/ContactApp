@@ -58,7 +58,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
         String phoneNumber = contactModel.getPhoneNumber();
         String addedTime = contactModel.getAddedTime();
         String updatedTime = contactModel.getUpdateTime();
-        String birth = contactModel.getBirthday();
+        String appointment = contactModel.getAppointment();
 
         if (image.equals("null")){
             holder.profileImage.setImageResource(R.drawable.ic_baseline_person_24);
@@ -90,7 +90,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
                     ""+phoneNumber,
                     ""+addedTime,
                     ""+updatedTime,
-                    ""+birth
+                    ""+appointment
             );
 
             Log.e(TAG, "onBindViewHolder: " + image);
@@ -99,7 +99,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
 
     //I do not understand anything, so I will change the parameters
     private void ShowMore(String position, String id, String image, String name,
-                          String lastName, String email, String address, String phoneNumber, String addedTime, String updatedTime, String birth) {
+                          String lastName, String email, String address, String phoneNumber, String addedTime, String updatedTime, String appointment) {
 
 
         String [] options = {"Edit", "Delete"};
@@ -121,7 +121,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.HolderCont
                     intent.putExtra("PHONE_NUMBER", phoneNumber);
                     intent.putExtra("ADDED_TIME", addedTime);
                     intent.putExtra("UPDATE_TIME", updatedTime);
-                    intent.putExtra("BIRTH", birth);
+                    intent.putExtra("APPO", appointment);
                     intent.putExtra("isEditMode", true);
 
                     context.startActivity(intent);

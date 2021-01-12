@@ -25,7 +25,7 @@ public class DatabaseConstants {
     public static final String C_EMAIL = "EMAIL";
     public static final String C_ADDRESS = "ADDRESS";
     public static final String C_PHONE_NUMBER = "PHONE_NUMBER";
-    public static final String C_BIRTH = "BIRTHDAY";
+    public static final String C_APPOINTMENT = "APPOINTMENT";
 
     //These two will be used by my filter
     public static final String C_ADDED_TIMESTAMP = "ADDED_TIME_STAMP";
@@ -41,7 +41,7 @@ public class DatabaseConstants {
             + C_PHONE_NUMBER + " TEXT,"
             + C_ADDED_TIMESTAMP + " TEXT,"
             + C_UPDATED_TIMESTAMP + " TEXT"
-            + C_BIRTH + " TEXT"
+            + C_APPOINTMENT + " TEXT"
             + ")";
 
 

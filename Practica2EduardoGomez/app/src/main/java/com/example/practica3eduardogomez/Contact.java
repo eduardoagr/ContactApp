@@ -2,7 +2,7 @@ package com.example.practica3eduardogomez;
 
 public class Contact {
 
-    String id, image, name, lastName, email, address, phoneNumber, addedTime, updateTime, birthday;
+    String id, image, name, lastName, email, address, phoneNumber, addedTime, updateTime, appointment;
 
     //Is always a good practice, to create an empty constructor
 
@@ -12,7 +12,7 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(String image, String name, String lastName, String email, String address, String phoneNumber, String addedTime, String updateTime, String birthday) {
+    public Contact(String image, String name, String lastName, String email, String address, String phoneNumber, String addedTime, String updateTime, String appointment) {
         this.image = image;
         this.name = name;
         this.lastName = lastName;
@@ -21,7 +21,7 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         this.addedTime = addedTime;
         this.updateTime = updateTime;
-        this.birthday = birthday;
+        this.appointment = appointment;
     }
 
     public String getId() {
@@ -96,12 +96,11 @@ public class Contact {
         this.updateTime = updateTime;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getAppointment() {
+        return appointment;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setAppointment(String appointment) {
+        this.appointment = appointment;
     }
 }
-

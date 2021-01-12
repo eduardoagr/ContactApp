@@ -104,7 +104,7 @@ public class AddUpdateContactActivity extends AppCompatActivity {
             name = intent.getStringExtra("NAME");
             lastName = intent.getStringExtra("LAST_NAME");
             email = intent.getStringExtra("EMAIL");
-            birhdate = intent.getStringExtra("BIRTH");
+            birhdate = intent.getStringExtra("APPO");
             // I was trying to implement google places api, that I always do this, but is deprecated.
             // I tried to use it, but I cannot retrieve the address
             address = intent.getStringExtra("ADDRESS");
@@ -158,8 +158,8 @@ public class AddUpdateContactActivity extends AppCompatActivity {
                     "" + address,
                     "" + phoneNumber,
                     "" + addedTime,
-                    ""+ birhdate,
-                    timestanp
+                    ""+ updatedTime,
+                    ""+ birhdate
             );
 
             finish();
@@ -170,7 +170,7 @@ public class AddUpdateContactActivity extends AppCompatActivity {
             String timestanp = "" + System.currentTimeMillis();
 
             //I have to ask why do we have to convert to string
-            long id = dbHelper.InsertRecord(
+            boolean id = dbHelper.InsertRecord(
                     "" + ImageFileUri,
                     "" + name,
                     " " + lastName,

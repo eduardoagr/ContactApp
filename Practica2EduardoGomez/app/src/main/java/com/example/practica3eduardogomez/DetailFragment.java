@@ -33,7 +33,7 @@ import java.util.Locale;
 
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDRESS;
-import static com.example.practica3eduardogomez.DatabaseConstants.C_BIRTH;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_APPOINTMENT;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_EMAIL;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ID;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_IMAGE;
@@ -189,7 +189,7 @@ public class DetailFragment extends Fragment {
                 String phoneNumber = "" + cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER));
                 String addedTimeStamp = "" + cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP));
                 String updateTimeStamp = "" + cursor.getString(cursor.getColumnIndex(C_UPDATED_TIMESTAMP));
-                String birth = "" + cursor.getString(cursor.getColumnIndex(C_BIRTH));
+                String birth = "" + cursor.getString(cursor.getColumnIndex(C_APPOINTMENT));
 
                 Calendar calendar = Calendar.getInstance(Locale.getDefault());
                 calendar.setTimeInMillis(Long.parseLong(addedTimeStamp));

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static com.example.practica3eduardogomez.DatabaseConstants.CREATE_TABLE;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDED_TIMESTAMP;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ADDRESS;
-import static com.example.practica3eduardogomez.DatabaseConstants.C_BIRTH;
+import static com.example.practica3eduardogomez.DatabaseConstants.C_APPOINTMENT;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_EMAIL;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_ID;
 import static com.example.practica3eduardogomez.DatabaseConstants.C_IMAGE;
@@ -48,8 +48,8 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //insert TO DB
-    public long InsertRecord(String image, String name, String lastName, String occupation, String address, String phoneNumber,
-                             String addedTime, String updatedTime, String birth){
+    public boolean InsertRecord(String image, String name, String lastName, String occupation, String address, String phoneNumber,
+                             String addedTime, String updatedTime, String appointment){
 
         //Get the writable database, because we want to add into it
         SQLiteDatabase db = this.getWritableDatabase();
@@ -65,12 +65,14 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(C_PHONE_NUMBER, phoneNumber);
         values.put(C_ADDED_TIMESTAMP, addedTime);
         values.put(C_UPDATED_TIMESTAMP, updatedTime);
-        values.put(C_BIRTH, birth);
+        values.put(C_APPOINTMENT, appointment);
 
-        long id = db.insert(TABLE_NAME, null, values);
-        db.close();
+        long result = db.insert(TABLE_NAME, null, values);
 
-        return id;
+        if (result == -1){
+            return false;
+        }else
+            return true;
     }
 
     //Get all Data from database
@@ -95,7 +97,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDRESS)),
                         ""+cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER)),
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP)),
-                        ""+cursor.getString(cursor.getColumnIndex(C_BIRTH))
+                        ""+cursor.getString(cursor.getColumnIndex(C_APPOINTMENT))
                 );
 
                 //We need to add our record to the list
@@ -132,7 +134,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDRESS)),
                         ""+cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER)),
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP)),
-                        ""+cursor.getString(cursor.getColumnIndex(C_BIRTH))
+                        ""+cursor.getString(cursor.getColumnIndex(C_APPOINTMENT))
                 );
 
                 //We need to add our record to the list
@@ -161,7 +163,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //Update data
     public void UpdateRecord(String id, String image, String name, String lastName, String occupation, String address, String phoneNumber,
-                             String addedTime, String updatedTime, String birth){
+                             String addedTime, String updatedTime, String appointment){
 
         //Get the writable database, because we want to add into it
         SQLiteDatabase db = this.getWritableDatabase();
@@ -177,7 +179,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(C_PHONE_NUMBER, phoneNumber);
         values.put(C_ADDED_TIMESTAMP, addedTime);
         values.put(C_UPDATED_TIMESTAMP, updatedTime);
-        values.put(C_BIRTH, birth);
+        values.put(C_APPOINTMENT, appointment);
 
         db.update(TABLE_NAME, values, C_ID + " = ?", new String[]{id});
         db.close();
