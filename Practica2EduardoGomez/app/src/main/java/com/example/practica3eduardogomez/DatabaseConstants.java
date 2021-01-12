@@ -6,10 +6,10 @@ public class DatabaseConstants {
 
     //ED note: Uppercase is the convention for constant variables
 
-    public static final String DB_NAME = "Records";
+    public static final String DB_NAME = "Contacts";
 
     //Db Table Name
-    public static final String TABLE_NAME = "My_Records";
+    public static final String TABLE_NAME = "MyContacts";
 
     //Drop the table
     public static final String DROP = "DROP TABLE IF EXISTS";
@@ -40,7 +40,7 @@ public class DatabaseConstants {
             + C_ADDRESS + " TEXT,"
             + C_PHONE_NUMBER + " TEXT,"
             + C_ADDED_TIMESTAMP + " TEXT,"
-            + C_UPDATED_TIMESTAMP + " TEXT"
+            + C_UPDATED_TIMESTAMP + " TEXT,"
             + C_APPOINTMENT + " TEXT"
             + ")";
 }

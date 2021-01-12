@@ -43,7 +43,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         //update our database (if we update our app)
-        sqLiteDatabase.execSQL(DROP + TABLE_NAME);
+        sqLiteDatabase.execSQL(DROP + " " + TABLE_NAME);
         //If we drop our table, we need to create it again
         onCreate(sqLiteDatabase);
     }
