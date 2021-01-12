@@ -12,7 +12,8 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(String image, String name, String lastName, String email, String address, String phoneNumber, String addedTime, String updateTime, String appointment) {
+    public Contact(String id, String image, String name, String lastName, String email, String address, String phoneNumber, String addedTime, String updateTime, String appointment) {
+        this.id = id;
         this.image = image;
         this.name = name;
         this.lastName = lastName;
@@ -23,6 +24,7 @@ public class Contact {
         this.updateTime = updateTime;
         this.appointment = appointment;
     }
+
 
     public String getId() {
         return id;

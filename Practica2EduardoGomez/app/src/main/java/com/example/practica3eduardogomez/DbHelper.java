@@ -101,6 +101,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDRESS)),
                         ""+cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER)),
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP)),
+                        ""+cursor.getString(cursor.getColumnIndex(C_UPDATED_TIMESTAMP)),
                         ""+cursor.getString(cursor.getColumnIndex(C_APPOINTMENT))
                 );
 
@@ -138,6 +139,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDRESS)),
                         ""+cursor.getString(cursor.getColumnIndex(C_PHONE_NUMBER)),
                         ""+cursor.getString(cursor.getColumnIndex(C_ADDED_TIMESTAMP)),
+                        ""+cursor.getString(cursor.getColumnIndex(C_UPDATED_TIMESTAMP)),
                         ""+cursor.getString(cursor.getColumnIndex(C_APPOINTMENT))
                 );
 

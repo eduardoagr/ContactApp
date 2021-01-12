@@ -77,7 +77,7 @@ public class DetailActivity extends AppCompatActivity {
         if( getIntent().getExtras() != null)
         {
             contactID = intent.getStringExtra("detailID");
-            if (!contactID.isEmpty()) {
+            if (contactID != null && !contactID.isEmpty()) {
                 ShowDetails();
             }
         }
