@@ -9,7 +9,7 @@ public class DatabaseConstants {
     public static final String DB_NAME = "Records";
 
     //Db Table Name
-    public static final String TABLE_NAME = "MY_CONTACTS";
+    public static final String TABLE_NAME = "My_Records";
 
     //Drop the table
     public static final String DROP = "DROP TABLE IF EXISTS";
