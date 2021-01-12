@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -68,8 +69,10 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(C_APPOINTMENT, appointment);
 
         long id = db.insert(TABLE_NAME, null, values);
-        db.close();
 
+        if (id != -1){
+            Log.e(TAG, "InsertRecord: " + "inserted");
+        }
         return id;
     }
 
