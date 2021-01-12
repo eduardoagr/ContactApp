@@ -43,6 +43,4 @@ public class DatabaseConstants {
             + C_UPDATED_TIMESTAMP + " TEXT"
             + C_APPOINTMENT + " TEXT"
             + ")";
-
-
 }
