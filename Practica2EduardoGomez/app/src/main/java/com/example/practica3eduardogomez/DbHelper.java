@@ -70,9 +70,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
         long id = db.insert(TABLE_NAME, null, values);
 
-        if (id != -1){
-            Log.e(TAG, "InsertRecord: " + "inserted");
-        }
+            if (id != -1){
+                Log.e(TAG, "InsertRecord: " + "inserted");
+            }
+
+        db.close();
+
         return id;
     }
 
